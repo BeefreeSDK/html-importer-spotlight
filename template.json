@@ -1,0 +1,634 @@
+{
+    "page": {
+        "body": {
+            "container": {
+                "style": {
+                    "background-color": "#FFFFFF"
+                }
+            },
+            "content": {
+                "computedStyle": {
+                    "linkColor": "#0066CC",
+                    "messageBackgroundColor": "#F5F5F5",
+                    "messageWidth": "600px"
+                },
+                "style": {
+                    "color": "#000000",
+                    "font-family": "Arial, Helvetica Neue, Helvetica, sans-serif"
+                }
+            },
+            "webFonts": []
+        },
+        "description": "",
+        "head": {
+            "meta": {
+                "preheader": "Join our community for exclusive dog care tips and offers",
+                "subject": "Welcome to Dog Lovers Community!",
+                "title": "Dog Lovers Email"
+            }
+        },
+        "rows": [
+            {
+                "columns": [
+                    {
+                        "grid-columns": 12,
+                        "modules": [
+                            {
+                                "descriptor": {
+                                    "computedStyle": {
+                                        "class": "center autowidth",
+                                        "width": "100%"
+                                    },
+                                    "image": {
+                                        "alt": "Happy Dogs Banner",
+                                        "href": "",
+                                        "prefix": "",
+                                        "src": "https://example.com/dog-banner.jpg",
+                                        "target": "_blank"
+                                    },
+                                    "style": {
+                                        "border-radius": "0px",
+                                        "padding-bottom": "10px",
+                                        "padding-left": "0px",
+                                        "padding-right": "0px",
+                                        "padding-top": "10px",
+                                        "width": "100%"
+                                    }
+                                },
+                                "locked": false,
+                                "type": "mailup-bee-newsletter-modules-image",
+                                "uuid": "694beea8-80c6-4b5d-ad9c-ffc0681c7f5d"
+                            }
+                        ],
+                        "style": {
+                            "background-color": "transparent",
+                            "border-bottom": "0 solid transparent",
+                            "border-left": "0 solid transparent",
+                            "border-right": "0 solid transparent",
+                            "border-top": "0 solid transparent",
+                            "padding-bottom": "5px",
+                            "padding-left": "0px",
+                            "padding-right": "0px",
+                            "padding-top": "5px"
+                        },
+                        "uuid": "ad822d3b-6055-4395-9115-47fa1ca09ec4"
+                    }
+                ],
+                "container": {
+                    "style": {
+                        "background-color": "#FFFFFF",
+                        "background-image": "none",
+                        "background-position": "top left",
+                        "background-repeat": "no-repeat"
+                    }
+                },
+                "content": {
+                    "computedStyle": {
+                        "hideContentOnDesktop": false,
+                        "hideContentOnMobile": false,
+                        "rowColStackOnMobile": true,
+                        "rowReverseColStackOnMobile": false,
+                        "verticalAlign": "top"
+                    },
+                    "style": {
+                        "background-color": "#F5F5F5",
+                        "background-image": "none",
+                        "background-position": "top left",
+                        "background-repeat": "no-repeat",
+                        "color": "#000000",
+                        "width": "500px"
+                    }
+                },
+                "empty": false,
+                "locked": false,
+                "synced": false,
+                "type": "",
+                "uuid": "81cf709d-3753-474d-9de4-cb98c782088a"
+            },
+            {
+                "columns": [
+                    {
+                        "grid-columns": 6,
+                        "modules": [
+                            {
+                                "descriptor": {
+                                    "computedStyle": {
+                                        "hideContentOnDesktop": false,
+                                        "hideContentOnMobile": false
+                                    },
+                                    "heading": {
+                                        "style": {
+                                            "color": "#333333",
+                                            "direction": "ltr",
+                                            "font-family": "inherit",
+                                            "font-size": "24px",
+                                            "font-weight": "700",
+                                            "letter-spacing": "0px",
+                                            "line-height": "120%",
+                                            "link-color": "#0066CC",
+                                            "text-align": "left"
+                                        },
+                                        "text": "Welcome Dog Lovers!",
+                                        "title": "h1"
+                                    },
+                                    "style": {
+                                        "padding-bottom": "15px",
+                                        "padding-left": "0px",
+                                        "padding-right": "0px",
+                                        "padding-top": "0px",
+                                        "text-align": "center",
+                                        "width": "100%"
+                                    }
+                                },
+                                "locked": false,
+                                "type": "mailup-bee-newsletter-modules-heading",
+                                "uuid": "5e18e5ed-afd5-4949-8284-70e66d58bd84"
+                            },
+                            {
+                                "descriptor": {
+                                    "computedStyle": {
+                                        "hideContentOnDesktop": false,
+                                        "hideContentOnMobile": false
+                                    },
+                                    "paragraph": {
+                                        "computedStyle": {
+                                            "linkColor": "#0066CC",
+                                            "paragraphSpacing": "16px"
+                                        },
+                                        "html": "Join our community of passionate dog owners and enthusiasts. Get access to exclusive tips, training advice, and special offers for your furry friends!",
+                                        "style": {
+                                            "color": "#000000",
+                                            "direction": "ltr",
+                                            "font-family": "inherit",
+                                            "font-size": "16px",
+                                            "font-weight": "400",
+                                            "letter-spacing": "0px",
+                                            "line-height": "150.000%",
+                                            "text-align": "left"
+                                        }
+                                    },
+                                    "style": {
+                                        "padding-bottom": "20px",
+                                        "padding-left": "10px",
+                                        "padding-right": "10px",
+                                        "padding-top": "10px"
+                                    }
+                                },
+                                "locked": false,
+                                "type": "mailup-bee-newsletter-modules-paragraph",
+                                "uuid": "a942dc46-8fc7-444b-8ecc-fbbcbffdbaf0"
+                            },
+                            {
+                                "descriptor": {
+                                    "button": {
+                                        "label": "<div class=\"txtTinyMce-wrapper\" style=\"\" data-mce-style=\"\"><p style=\"word-break:break-word;\" data-mce-style=\"word-break:break-word;\">Join Now</p></div>",
+                                        "style": {
+                                            "background-color": "#FFA500",
+                                            "border-bottom": "0 solid transparent",
+                                            "border-left": "0 solid transparent",
+                                            "border-radius": "5px",
+                                            "border-right": "0 solid transparent",
+                                            "border-top": "0 solid transparent",
+                                            "color": "#FFFFFF",
+                                            "direction": "ltr",
+                                            "font-family": "inherit",
+                                            "font-size": "16px",
+                                            "line-height": "200%",
+                                            "padding-bottom": "5px",
+                                            "padding-left": "20px",
+                                            "padding-right": "20px",
+                                            "padding-top": "5px",
+                                            "width": "auto"
+                                        },
+                                        "target": "_self"
+                                    },
+                                    "computedStyle": {
+                                        "hideContentOnDesktop": false,
+                                        "hideContentOnMobile": false
+                                    },
+                                    "style": {
+                                        "padding-bottom": "10px",
+                                        "padding-left": "10px",
+                                        "padding-right": "10px",
+                                        "padding-top": "10px",
+                                        "text-align": "center"
+                                    }
+                                },
+                                "locked": false,
+                                "type": "mailup-bee-newsletter-modules-button",
+                                "uuid": "c136f98b-5ee7-441e-a036-8730f175e82c"
+                            }
+                        ],
+                        "style": {
+                            "background-color": "transparent",
+                            "border-bottom": "0 solid transparent",
+                            "border-left": "0 solid transparent",
+                            "border-right": "0 solid transparent",
+                            "border-top": "0 solid transparent",
+                            "padding-bottom": "5px",
+                            "padding-left": "0px",
+                            "padding-right": "0px",
+                            "padding-top": "5px"
+                        },
+                        "uuid": "8ebad058-083c-488a-a262-8409fdbc3fa9"
+                    },
+                    {
+                        "grid-columns": 6,
+                        "modules": [
+                            {
+                                "descriptor": {
+                                    "computedStyle": {
+                                        "class": "center autowidth",
+                                        "width": "100%"
+                                    },
+                                    "image": {
+                                        "alt": "Happy Dog",
+                                        "href": "",
+                                        "prefix": "",
+                                        "src": "https://example.com/happy-dog.jpg",
+                                        "target": "_blank"
+                                    },
+                                    "style": {
+                                        "border-radius": "0px",
+                                        "padding-bottom": "10px",
+                                        "padding-left": "0px",
+                                        "padding-right": "0px",
+                                        "padding-top": "10px",
+                                        "width": "100%"
+                                    }
+                                },
+                                "locked": false,
+                                "type": "mailup-bee-newsletter-modules-image",
+                                "uuid": "4967b50a-dfb6-4a40-8d7b-f3e5d2deb643"
+                            }
+                        ],
+                        "style": {
+                            "background-color": "transparent",
+                            "border-bottom": "0 solid transparent",
+                            "border-left": "0 solid transparent",
+                            "border-right": "0 solid transparent",
+                            "border-top": "0 solid transparent",
+                            "padding-bottom": "5px",
+                            "padding-left": "0px",
+                            "padding-right": "0px",
+                            "padding-top": "5px"
+                        },
+                        "uuid": "f5560ce5-7504-458d-9168-6f45027a64f2"
+                    }
+                ],
+                "container": {
+                    "style": {
+                        "background-color": "#FFFFFF",
+                        "background-image": "none",
+                        "background-position": "top left",
+                        "background-repeat": "no-repeat"
+                    }
+                },
+                "content": {
+                    "computedStyle": {
+                        "hideContentOnDesktop": false,
+                        "hideContentOnMobile": false,
+                        "rowColStackOnMobile": true,
+                        "rowReverseColStackOnMobile": false,
+                        "verticalAlign": "top"
+                    },
+                    "style": {
+                        "background-color": "#F5F5F5",
+                        "background-image": "none",
+                        "background-position": "top left",
+                        "background-repeat": "no-repeat",
+                        "color": "#000000",
+                        "width": "500px"
+                    }
+                },
+                "empty": false,
+                "locked": false,
+                "synced": false,
+                "type": "",
+                "uuid": "14900ef4-e98e-4bf1-8467-780156d9620b"
+            },
+            {
+                "columns": [
+                    {
+                        "grid-columns": 4,
+                        "modules": [
+                            {
+                                "descriptor": {
+                                    "computedStyle": {
+                                        "iconHeight": "32px",
+                                        "iconSpacing": {
+                                            "padding-bottom": "5px",
+                                            "padding-left": "5px",
+                                            "padding-right": "5px",
+                                            "padding-top": "5px"
+                                        },
+                                        "itemsSpacing": "0px"
+                                    },
+                                    "iconsList": {
+                                        "icons": [
+                                            {
+                                                "height": "50",
+                                                "href": "",
+                                                "id": "b7830a59-44e4-4187-9872-8c8851b159c8",
+                                                "image": "https://example.com/dog-food-icon.png",
+                                                "target": "_self",
+                                                "text": "Nutrition Tips",
+                                                "textPosition": "bottom",
+                                                "width": "50"
+                                            }
+                                        ]
+                                    },
+                                    "style": {
+                                        "color": "#000000",
+                                        "font-family": "inherit",
+                                        "font-size": "14px",
+                                        "font-weight": "400",
+                                        "padding-bottom": "0",
+                                        "padding-left": "0",
+                                        "padding-right": "0",
+                                        "padding-top": "15px",
+                                        "text-align": "center"
+                                    }
+                                },
+                                "locked": false,
+                                "type": "mailup-bee-newsletter-modules-icons",
+                                "uuid": "f254cf14-9d4b-4b76-aa8e-967f6fb16289"
+                            }
+                        ],
+                        "style": {
+                            "background-color": "transparent",
+                            "border-bottom": "0 solid transparent",
+                            "border-left": "0 solid transparent",
+                            "border-right": "0 solid transparent",
+                            "border-top": "0 solid transparent",
+                            "padding-bottom": "5px",
+                            "padding-left": "0px",
+                            "padding-right": "0px",
+                            "padding-top": "5px"
+                        },
+                        "uuid": "65d98b88-2b73-46da-8ed6-d01c480c9625"
+                    },
+                    {
+                        "grid-columns": 4,
+                        "modules": [
+                            {
+                                "descriptor": {
+                                    "computedStyle": {
+                                        "iconHeight": "32px",
+                                        "iconSpacing": {
+                                            "padding-bottom": "5px",
+                                            "padding-left": "5px",
+                                            "padding-right": "5px",
+                                            "padding-top": "5px"
+                                        },
+                                        "itemsSpacing": "0px"
+                                    },
+                                    "iconsList": {
+                                        "icons": [
+                                            {
+                                                "height": "50",
+                                                "href": "",
+                                                "id": "f79d987d-12f0-44b1-ab88-51c7615b8ae3",
+                                                "image": "https://example.com/dog-training-icon.png",
+                                                "target": "_self",
+                                                "text": "Training Guides",
+                                                "textPosition": "bottom",
+                                                "width": "50"
+                                            }
+                                        ]
+                                    },
+                                    "style": {
+                                        "color": "#000000",
+                                        "font-family": "inherit",
+                                        "font-size": "14px",
+                                        "font-weight": "400",
+                                        "padding-bottom": "0",
+                                        "padding-left": "0",
+                                        "padding-right": "0",
+                                        "padding-top": "15px",
+                                        "text-align": "center"
+                                    }
+                                },
+                                "locked": false,
+                                "type": "mailup-bee-newsletter-modules-icons",
+                                "uuid": "87a77253-5506-44d6-9f72-9e99b9c2981f"
+                            }
+                        ],
+                        "style": {
+                            "background-color": "transparent",
+                            "border-bottom": "0 solid transparent",
+                            "border-left": "0 solid transparent",
+                            "border-right": "0 solid transparent",
+                            "border-top": "0 solid transparent",
+                            "padding-bottom": "5px",
+                            "padding-left": "0px",
+                            "padding-right": "0px",
+                            "padding-top": "5px"
+                        },
+                        "uuid": "51bee609-f24b-43b9-aab8-31a596c5f46b"
+                    },
+                    {
+                        "grid-columns": 4,
+                        "modules": [
+                            {
+                                "descriptor": {
+                                    "computedStyle": {
+                                        "iconHeight": "32px",
+                                        "iconSpacing": {
+                                            "padding-bottom": "5px",
+                                            "padding-left": "5px",
+                                            "padding-right": "5px",
+                                            "padding-top": "5px"
+                                        },
+                                        "itemsSpacing": "0px"
+                                    },
+                                    "iconsList": {
+                                        "icons": [
+                                            {
+                                                "height": "50",
+                                                "href": "",
+                                                "id": "bbc5827a-a48d-4065-baed-1d658458014a",
+                                                "image": "https://example.com/dog-health-icon.png",
+                                                "target": "_self",
+                                                "text": "Health Advice",
+                                                "textPosition": "bottom",
+                                                "width": "50"
+                                            }
+                                        ]
+                                    },
+                                    "style": {
+                                        "color": "#000000",
+                                        "font-family": "inherit",
+                                        "font-size": "14px",
+                                        "font-weight": "400",
+                                        "padding-bottom": "0",
+                                        "padding-left": "0",
+                                        "padding-right": "0",
+                                        "padding-top": "15px",
+                                        "text-align": "center"
+                                    }
+                                },
+                                "locked": false,
+                                "type": "mailup-bee-newsletter-modules-icons",
+                                "uuid": "4f010d03-db27-418d-bf15-01ea3825fb21"
+                            }
+                        ],
+                        "style": {
+                            "background-color": "transparent",
+                            "border-bottom": "0 solid transparent",
+                            "border-left": "0 solid transparent",
+                            "border-right": "0 solid transparent",
+                            "border-top": "0 solid transparent",
+                            "padding-bottom": "5px",
+                            "padding-left": "0px",
+                            "padding-right": "0px",
+                            "padding-top": "5px"
+                        },
+                        "uuid": "328c0cfc-79b6-40ee-9f3a-ee9ebb533572"
+                    }
+                ],
+                "container": {
+                    "style": {
+                        "background-color": "#FFFFFF",
+                        "background-image": "none",
+                        "background-position": "top left",
+                        "background-repeat": "no-repeat"
+                    }
+                },
+                "content": {
+                    "computedStyle": {
+                        "hideContentOnDesktop": false,
+                        "hideContentOnMobile": false,
+                        "rowColStackOnMobile": true,
+                        "rowReverseColStackOnMobile": false,
+                        "verticalAlign": "top"
+                    },
+                    "style": {
+                        "background-color": "#F5F5F5",
+                        "background-image": "none",
+                        "background-position": "top left",
+                        "background-repeat": "no-repeat",
+                        "color": "#000000",
+                        "width": "500px"
+                    }
+                },
+                "empty": false,
+                "locked": false,
+                "synced": false,
+                "type": "",
+                "uuid": "47d2c5e9-8870-413d-8f87-2b19b0309a19"
+            },
+            {
+                "columns": [
+                    {
+                        "grid-columns": 12,
+                        "modules": [
+                            {
+                                "descriptor": {
+                                    "computedStyle": {
+                                        "align": "center"
+                                    },
+                                    "divider": {
+                                        "style": {
+                                            "border-top": "1px solid #CCCCCC",
+                                            "width": "100%"
+                                        }
+                                    },
+                                    "style": {
+                                        "padding-bottom": "20px",
+                                        "padding-left": "10px",
+                                        "padding-right": "10px",
+                                        "padding-top": "20px"
+                                    }
+                                },
+                                "locked": false,
+                                "type": "mailup-bee-newsletter-modules-divider",
+                                "uuid": "df765297-9b23-43db-bcb6-420a3acef97a"
+                            },
+                            {
+                                "descriptor": {
+                                    "computedStyle": {
+                                        "hideContentOnDesktop": false,
+                                        "hideContentOnMobile": false
+                                    },
+                                    "paragraph": {
+                                        "computedStyle": {
+                                            "linkColor": "#0066CC",
+                                            "paragraphSpacing": "16px"
+                                        },
+                                        "html": "© 2023 Dog Lovers Community. All rights reserved.",
+                                        "style": {
+                                            "color": "#999999",
+                                            "direction": "ltr",
+                                            "font-family": "inherit",
+                                            "font-size": "12px",
+                                            "font-weight": "400",
+                                            "letter-spacing": "0px",
+                                            "line-height": "120%",
+                                            "text-align": "center"
+                                        }
+                                    },
+                                    "style": {
+                                        "padding-bottom": "10px",
+                                        "padding-left": "10px",
+                                        "padding-right": "10px",
+                                        "padding-top": "10px"
+                                    }
+                                },
+                                "locked": false,
+                                "type": "mailup-bee-newsletter-modules-paragraph",
+                                "uuid": "21edddce-a717-4669-9e94-a8015941dae4"
+                            }
+                        ],
+                        "style": {
+                            "background-color": "transparent",
+                            "border-bottom": "0 solid transparent",
+                            "border-left": "0 solid transparent",
+                            "border-right": "0 solid transparent",
+                            "border-top": "0 solid transparent",
+                            "padding-bottom": "5px",
+                            "padding-left": "0px",
+                            "padding-right": "0px",
+                            "padding-top": "5px"
+                        },
+                        "uuid": "76bcf913-c61c-4b77-a54a-1f07176e42dc"
+                    }
+                ],
+                "container": {
+                    "style": {
+                        "background-color": "#FFFFFF",
+                        "background-image": "none",
+                        "background-position": "top left",
+                        "background-repeat": "no-repeat"
+                    }
+                },
+                "content": {
+                    "computedStyle": {
+                        "hideContentOnDesktop": false,
+                        "hideContentOnMobile": false,
+                        "rowColStackOnMobile": true,
+                        "rowReverseColStackOnMobile": false,
+                        "verticalAlign": "top"
+                    },
+                    "style": {
+                        "background-color": "#F5F5F5",
+                        "background-image": "none",
+                        "background-position": "top left",
+                        "background-repeat": "no-repeat",
+                        "color": "#000000",
+                        "width": "500px"
+                    }
+                },
+                "empty": false,
+                "locked": false,
+                "synced": false,
+                "type": "",
+                "uuid": "00f7969c-7164-4328-b58f-be5609c22030"
+            }
+        ],
+        "template": {
+            "version": "2.0.0"
+        },
+        "title": ""
+    }
+}
