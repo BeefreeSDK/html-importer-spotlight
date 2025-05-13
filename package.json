@@ -6,7 +6,8 @@
     "scripts": {
         "start": "node proxy-server.js",
         "dev": "nodemon proxy-server.js",
-        "create-env": "cp .env.example .env"
+        "create-env": "cp .env.example .env",
+        "setup": "npm install && npm run create-env"
     },
     "dependencies": {
         "axios": "^1.6.7",

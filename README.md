@@ -41,15 +41,10 @@ beefree-sdk-project/
    npm init -y
    ```
 
-3. **Install dependencies**:
+3. **Install dependencies and set up environment**:
    ```bash
-   npm install express axios cors dotenv
-   ```
-
-4. **Set up environment variables**:
-   ```bash
-   # Copy the example .env file
-   npm run create-env
+   # This will install all dependencies and set up the environment file
+   npm run setup
    
    # Then edit the .env file with your API credentials
    ```
@@ -64,7 +59,7 @@ beefree-sdk-project/
 
 1. **Start the proxy server** (in one terminal):
    ```bash
-   node proxy-server.js
+   npm start
    ```
 
 2. **Access the application**:
@@ -72,6 +67,13 @@ beefree-sdk-project/
    ```
    http://localhost:3001/index.html
    ```
+
+#### Development Mode
+
+For development with auto-reload when files change:
+```bash
+npm run dev
+```
 
 ## 🔧 How It Works
 
@@ -85,7 +87,7 @@ beefree-sdk-project/
 2. **HTML Import Feature**:
    - Click "Import HTML" button to open modal
    - Paste HTML content into textarea
-   - Click "Upload" to convert HTML to Beefree SDK template
+   - Click "Import" to convert HTML to Beefree SDK template
    - Validation ensures basic HTML structure
 
 3. **Proxy API Call**:
@@ -103,13 +105,19 @@ beefree-sdk-project/
    - Receives HTML from frontend
    - Forwards to HTML Importer API with proper headers
    - Returns converted JSON template
+   - Implements reasonable size limits (10MB for requests)
 
 2. **CORS Handling**:
    - Uses `cors` middleware
-   - Allows requests from your frontend origin
+   - Restricts requests to localhost origin
 
 3. **Static File Serving**:
    - Serves your `index.html` and other assets
+
+4. **Size Limitations**:
+   - 10MB limit for HTML files
+   - User warnings for files over 5MB
+   - Error handling for oversized content
 
 ### API Flow
 
