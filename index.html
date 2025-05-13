@@ -117,7 +117,6 @@
       border-left: 4px solid #f44336;
       padding: 10px;
       margin-top: 10px;
-      margin-bottom: 10px;
       border-radius: 4px;
       font-size: 14px;
       display: none;
@@ -127,13 +126,6 @@
       display: none;
       margin-top: 10px;
       color: #6a0dad;
-    }
-
-    #size-info {
-      color: #666;
-      font-style: italic;
-      font-size: 12px;
-      margin-top: 5px;
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -152,14 +144,11 @@
   <!-- HTML Import Modal -->
   <div id="html-import-modal" class="modal">
     <div class="modal-content">
-      <h3>Import HTML</h3>
-
+      <h3>Import HTML Email</h3>
       <p style="margin-bottom: 10px; font-size: 12px; color: #666;">
-        Paste your HTML code below. For best results, use HTML under 10MB in size.
+        Paste your HTML email code below. Scripts and other potentially harmful content will be automatically removed.
       </p>
-      <textarea id="html-input" placeholder="Paste your HTML here..."></textarea>
-      <div id="size-info"></div>
-
+      <textarea id="html-input" placeholder="Paste your HTML email here..."></textarea>
       <div id="html-error" class="error-message">HTML not valid</div>
       <div id="loading" class="loading">Converting HTML, please wait...</div>
       <div class="modal-actions">
@@ -260,37 +249,41 @@
       reader.readAsText(templateFile);
     };
 
-    // HTML Import functionality
     var modal = document.getElementById('html-import-modal');
     var htmlInput = document.getElementById('html-input');
-    var sizeInfo = document.getElementById('size-info');
     var errorMessage = document.getElementById('html-error');
     var loading = document.getElementById('loading');
     var importBtn = document.getElementById('import-html-btn');
     var cancelBtn = document.querySelector('.cancel-btn');
     var uploadBtn = document.querySelector('.upload-btn');
     
-    // Monitor input size when pasting or typing
-    htmlInput.addEventListener('input', function() {
-      const html = htmlInput.value;
-      const sizeInKB = (html.length / 1024).toFixed(2);
-      const sizeInMB = (html.length / (1024 * 1024)).toFixed(2);
+    function sanitizeHtml(html) {
+      html = html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
       
-      if (html.length > 5 * 1024 * 1024) { // 5MB
-        sizeInfo.innerHTML = `Content size: ${sizeInMB} MB <span style="color: #ff9800;">Large content may take longer to process.</span>`;
-      } else if (html.length > 100 * 1024) { // 100KB
-        sizeInfo.textContent = `Content size: ${sizeInMB} MB`;
-      } else if (html.length > 0) {
-        sizeInfo.textContent = `Content size: ${sizeInKB} KB`;
-      } else {
-        sizeInfo.textContent = '';
-      }
-    });
+      html = html.replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, '');
+      
+      const eventHandlers = [
+        'onabort', 'onblur', 'onchange', 'onclick', 'ondblclick', 'onerror', 'onfocus', 
+        'onkeydown', 'onkeypress', 'onkeyup', 'onload', 'onmousedown', 'onmousemove', 
+        'onmouseout', 'onmouseover', 'onmouseup', 'onreset', 'onresize', 'onscroll', 
+        'onselect', 'onsubmit', 'onunload'
+      ];
+      
+      eventHandlers.forEach(handler => {
+        const regex = new RegExp(` ${handler}="[^"]*"| ${handler}='[^']*'| ${handler}=[^ >]*`, 'gi');
+        html = html.replace(regex, '');
+      });
+      
+      html = html.replace(/javascript:[^\s"']+/gi, '');
+      
+      html = html.replace(/data:[^\s"']+/gi, '');
+      
+      return html;
+    }
 
     importBtn.addEventListener('click', function() {
       modal.style.display = 'block';
       htmlInput.value = '';
-      sizeInfo.textContent = '';
       errorMessage.style.display = 'none';
     });
 
@@ -299,50 +292,30 @@
     });
 
     uploadBtn.addEventListener('click', function() {
-      // Get the HTML from textarea
-      const html = htmlInput.value.trim();
+      var html = htmlInput.value.trim();
       
-      // Basic validation for HTML content
       if (!html || !html.includes('<') || !html.includes('>')) {
-        errorMessage.textContent = 'HTML not valid';
+        errorMessage.textContent = 'Please enter valid HTML content';
         errorMessage.style.display = 'block';
         return;
       }
       
-      // Size validation - warn user if HTML is very large
-      const sizeInMB = (html.length / (1024 * 1024)).toFixed(2);
-      if (html.length > 5 * 1024 * 1024) { // 5MB warning threshold
-        if (!confirm(`The HTML content is quite large (${sizeInMB} MB). Large content may take longer to process or fail. Continue anyway?`)) {
-          return;
-        }
-      } else if (html.length > 10 * 1024 * 1024) { // 10MB limit
-        errorMessage.textContent = 'Content is too large. Maximum allowed size is 10MB.';
-        errorMessage.style.display = 'block';
-        return;
-      }
+      // Basic sanitization to prevent common XSS attack vectors
+      // Remove script tags, iframe tags, and event handlers
+      html = sanitizeHtml(html);
       
-      startConversion(html);
-    });
-    
-    function startConversion(html) {
       loading.style.display = 'block';
       errorMessage.style.display = 'none';
       
       fetch('http://localhost:3001/proxy/html-to-json', {
         method: 'POST',
         headers: {
-          'Content-Type': 'text/html' // Must be exactly text/html
+          'Content-Type': 'text/html'
         },
         body: html
       })
       .then(response => {
-        if (!response.ok) {
-          return response.json().then(err => {
-            throw new Error(err.error || 'Conversion failed');
-          }).catch(() => {
-            throw new Error('Server error: Unable to process the HTML');
-          });
-        }
+        if (!response.ok) throw new Error('Conversion failed');
         return response.json();
       })
       .then(data => {
@@ -350,15 +323,13 @@
         modal.style.display = 'none';
       })
       .catch(error => {
-        errorMessage.textContent = error.message || 'HTML conversion failed';
+        errorMessage.textContent = 'Error: ' + error.message;
         errorMessage.style.display = 'block';
-        console.error('HTML conversion error:', error);
       })
       .finally(() => {
         loading.style.display = 'none';
       });
-    }
-    
+    });
 
     window.addEventListener('click', function(event) {
       if (event.target === modal) {
@@ -368,13 +339,12 @@
 
     document.getElementById('choose-template').addEventListener('change', loadTemplate, false);
 
-    // Use our proxy server to get the authentication token
-    fetch('http://localhost:3001/auth/beefree-token')
-      .then(response => {
-        if (!response.ok) throw new Error('Authentication failed');
-        return response.json();
-      })
-      .then(token => {
+    request(
+      'POST',
+      'https://auth.getbee.io/apiauth',
+      'grant_type=password&client_id=4fe2a4d9-46ca-4630-910c-d061a595c9f7&client_secret=wrSqUNqZPIkeUbV7JCehbz50Q676WqC49HoC0isOql2k9hTYdtjM',
+      'application/x-www-form-urlencoded',
+      function (token) {
         BeePlugin.create(token, beeConfig, function (beePluginInstance) {
           bee = beePluginInstance;
           fetch('./template.json')
@@ -387,10 +357,6 @@
               bee.start({});
             });
         });
-      })
-      .catch(error => {
-        console.error('Authentication error:', error);
-        alert('Failed to authenticate with BeeFree API. Please check your credentials.');
       });
   </script>
 </body>
