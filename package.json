@@ -1,13 +1,18 @@
 {
-    "name": "beefree-proxy",
+    "name": "beefree-html-importer-spotlight",
     "version": "1.0.0",
-    "description": "Proxy server for BeeFree SDK with HTML import functionality",
-    "main": "proxy-server.js",
+    "description": "Demo environment for the Beefree HTML Importer API spotlight",
+    "main": "dist/index.js",
     "scripts": {
-        "start": "node proxy-server.js",
-        "dev": "nodemon proxy-server.js",
+        "start": "node dist/index.js",
+        "dev": "nodemon --exec ts-node src/index.ts",
+        "build": "npm run clean && tsc",
+        "watch": "tsc --watch",
+        "clean": "rm -rf dist",
         "create-env": "cp .env.example .env",
-        "setup": "npm install && npm run create-env"
+        "setup": "npm install && npm run create-env",
+        "dev:debug": "nodemon --inspect --exec ts-node src/index.ts",
+        "lint": "eslint --ext .ts src/"
     },
     "dependencies": {
         "axios": "^1.6.7",
@@ -16,7 +21,12 @@
         "express": "^4.18.2"
     },
     "devDependencies": {
-        "nodemon": "^3.0.2"
+        "@types/cors": "^2.8.18",
+        "@types/express": "^5.0.1",
+        "@types/node": "^22.15.17",
+        "nodemon": "^3.0.2",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.8.3"
     },
     "keywords": [],
     "author": "",

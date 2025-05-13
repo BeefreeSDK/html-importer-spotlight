@@ -1,13 +1,15 @@
 # 🐝 Beefree SDK Integration with HTML Import
 
-This project demonstrates how to integrate Beefree SDK email builder SDK with a custom HTML import feature, including a proxy server to handle CORS issues.
+This project demonstrates how to integrate Beefree SDK email builder SDK with a custom HTML import feature, including a TypeScript proxy server to handle CORS issues and HTML sanitization.
 
 ## 🌟 Features
 
 - Beefree SDK email builder integration
-- HTML import functionality with validation
+- HTML import functionality with content sanitization
+- TypeScript for better code quality and maintenance
 - Server-side proxy for API requests
 - Template loading and saving
+- Security-focused HTML processing
 
 ## 🛠️ Setup Instructions
 
@@ -21,59 +23,113 @@ This project demonstrates how to integrate Beefree SDK email builder SDK with a 
 ### 2. Project Structure
 
 ```
-beefree-sdk-project/
-├── index.html            # Frontend application
-├── proxy-server.js       # Node.js proxy server
-├── package.json          # Node.js dependencies
-└── template.json         # Sample template (optional)
+html-importer-spotlight/
+├── public/               # Static assets
+│   ├── index.html        # Main application HTML
+│   └── template.json     # Sample BeeFree template
+├── src/                  # TypeScript source files
+│   ├── api/              # API controllers and routes
+│   │   ├── html-import.controller.ts  # HTML import controller
+│   │   ├── html-import.routes.ts      # Route definitions
+│   │   └── index.ts                   # API barrel exports
+│   ├── config/           # Configuration
+│   │   ├── app-config.ts # Application configuration
+│   │   └── index.ts      # Config barrel exports
+│   ├── services/         # Service implementations
+│   │   ├── bee-api.service.ts  # BeeFree API service
+│   │   └── index.ts            # Services barrel exports
+│   ├── types/            # TypeScript type definitions
+│   │   ├── bee-api.types.ts   # BeeFree API type definitions
+│   │   └── index.ts           # Types barrel exports
+│   ├── utils/            # Utility functions
+│   │   ├── html-sanitizer.ts  # HTML sanitization utilities
+│   │   └── index.ts           # Utils barrel exports
+│   ├── index.ts          # Main application entry point
+│   └── server.ts         # Express server setup
+├── dist/                 # Compiled JavaScript (generated)
+├── package.json          # Project dependencies and scripts
+├── tsconfig.json         # TypeScript configuration
+└── .env.example          # Example environment variables
 ```
 
 ### 3. Installation
 
-1. **Clone or create project folder**:
+1. **Clone the repository**:
    ```bash
-   mkdir beefree-project
-   cd beefree-project
+   git clone git@github.com:LFil89/html-importer-spotlight.git
+   cd html-importer-spotlight
    ```
 
-2. **Initialize Node.js project**:
+2. **Install dependencies and set up environment**:
    ```bash
-   npm init -y
-   ```
-
-3. **Install dependencies and set up environment**:
-   ```bash
-   # This will install all dependencies and set up the environment file
+   # This will install all dependencies and create the environment file
    npm run setup
    
    # Then edit the .env file with your API credentials
    ```
 
-### 5. File Setup
-
-1. Create `index.html` with the provided HTML content
-2. Create `proxy-server.js` with the provided server code
-3. Create `package.json` with the provided configuration
-
-### 5. Running the Application
-
-1. **Start the proxy server** (in one terminal):
+3. **Build the TypeScript code**:
    ```bash
+   npm run build
+   ```
+
+### 4. Running the Application
+
+1. **Production mode**:
+   ```bash
+   # Build the TypeScript files
+   npm run build
+   
+   # Run the compiled JavaScript version
    npm start
    ```
 
-2. **Access the application**:
+2. **Development mode** (with auto-reload):
+   ```bash
+   # Run the TypeScript version directly with hot reloading
+   npm run dev
+   ```
+
+3. **Access the application**:
    Open your browser to:
    ```
-   http://localhost:3001/index.html
+   http://localhost:3001
    ```
 
-#### Development Mode
+### 5. TypeScript Implementation
 
-For development with auto-reload when files change:
+#### Key Components
+
+- **API Layer** (`/src/api/`): Controllers and routes that handle HTTP requests
+- **Services Layer** (`/src/services/`): Business logic and external API interactions
+- **Utils** (`/src/utils/`): Utility functions and helpers
+- **Config** (`/src/config/`): Application configuration management
+- **Types** (`/src/types/`): TypeScript type definitions
+
+#### Development Commands
+
 ```bash
+# Build the TypeScript files
+npm run build
+
+# Run TypeScript directly with hot reloading
 npm run dev
+
+# Run with debugging support
+npm run dev:debug
 ```
+
+## 🔒 Security
+
+### HTML Sanitization
+
+The TypeScript implementation includes comprehensive HTML sanitization to protect against security threats:
+
+- **Script Removal**: All `<script>` tags are automatically removed
+- **Iframe Removal**: All `<iframe>` tags that could load external content are stripped
+- **Event Handler Sanitization**: Removes potentially harmful event handlers like `onclick`, `onload`, etc.
+- **URL Sanitization**: Removes `javascript:` and dangerous `data:` URLs
+- **Size Limits**: Enforces maximum content size to prevent DoS attacks
 
 ## 🔧 How It Works
 
