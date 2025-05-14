@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import config from './config/app-config';
-import htmlImportRoutes from './api/html-import.routes';
+import htmlImportRoutes from './routes';
 
 const app = express();
 
@@ -15,6 +15,10 @@ app.use(cors(
 
 app.use(express.text({ 
   type: 'text/html',
+  limit: config.maxSizeBytes
+}));
+
+app.use(express.json({
   limit: config.maxSizeBytes
 }));
 
