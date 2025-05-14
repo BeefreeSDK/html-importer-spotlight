@@ -26,14 +26,6 @@ const contentDefaults = {
       paddingRight: "15px",
       paddingTop: "15px",
       textAlign: "center",
-    },
-    mobileStyles: {
-      paddingBottom: "10px",
-      paddingLeft: "10px",
-      paddingRight: "10px",
-      paddingTop: "10px",
-      textAlign: "center",
-      fontSize: "16px",
     }
   },
   menu: {
@@ -42,14 +34,6 @@ const contentDefaults = {
       fontSize: "14px",
       letterSpacing: "0px",
       fontWeight: '500',
-    },
-    mobileStyles: {
-      textAlign: "center",
-      fontSize: "14px",
-      paddingTop: "10px",
-      paddingRight: "10px",
-      paddingBottom: "10px",
-      paddingLeft: "10px",
     }
   },
   carousel: {
@@ -58,12 +42,6 @@ const contentDefaults = {
       paddingLeft: "20px",
       paddingRight: "20px",
       paddingTop: "20px",
-    },
-    mobileStyles: {
-      paddingTop: "15px",
-      paddingRight: "15px",
-      paddingBottom: "15px",
-      paddingLeft: "15px",
     }
   },
   divider: {
@@ -75,11 +53,6 @@ const contentDefaults = {
       paddingLeft: "20px",
       paddingRight: "20px",
       paddingTop: "20px",
-    },
-    mobileStyles: {
-      align: 'center',
-      paddingLeft: "15px",
-      paddingRight: "15px",
     }
   },
   form: {
@@ -130,14 +103,6 @@ const contentDefaults = {
       margingLeft: "0px",
       marginRight: "0px",
       marginTop: "10px",
-    },
-    mobileStyles: {
-      textAlign: "center",
-      fontSize: "14px",
-      paddingTop: "10px",
-      paddingRight: "15px",
-      paddingBottom: "10px",
-      paddingLeft: "15px",
     }
   },
   title: {
@@ -148,14 +113,6 @@ const contentDefaults = {
       paddingRight: '15px',
       paddingBottom: '15px',
       paddingLeft: '15px',
-    },
-    mobileStyles: {
-      textAlign: "center",
-      fontSize: "22px",
-      paddingTop: "15px",
-      paddingRight: "15px",
-      paddingBottom: "15px",
-      paddingLeft: "15px",
     }
   },
   icons: {
@@ -191,14 +148,6 @@ const contentDefaults = {
       paddingLeft: "8px",
       paddingRight: "8px",
       paddingTop: "8px",
-    },
-    mobileStyles: {
-      textAlign: "center",
-      fontSize: "14px",
-      paddingTop: "15px",
-      paddingRight: "15px",
-      paddingBottom: "15px",
-      paddingLeft: "15px",
     }
   },
   image: {
@@ -212,13 +161,6 @@ const contentDefaults = {
       paddingRight: "15px",
       paddingTop: "15px",
       align: "center",
-    },
-    mobileStyles: {
-      textAlign: "center",
-      paddingTop: "15px",
-      paddingRight: "15px",
-      paddingBottom: "15px",
-      paddingLeft: "15px",
     }
   },
   list: {
@@ -243,14 +185,6 @@ const contentDefaults = {
       paddingRight: '15px',
       paddingBottom: '15px',
       paddingLeft: '15px',
-    },
-    mobileStyles: {
-      textAlign: "left",
-      fontSize: "14px",
-      paddingTop: "15px",
-      paddingRight: "15px",
-      paddingBottom: "15px",
-      paddingLeft: "15px",
     }
   },
   social: {
@@ -277,13 +211,6 @@ const contentDefaults = {
       height: 48,
       width: 48,
       iconWidth: 32
-    },
-    mobileStyles: {
-      textAlign: "center",
-      paddingTop: "15px",
-      paddingRight: "15px",
-      paddingBottom: "15px",
-      paddingLeft: "15px",
     }
   },
   video: {
@@ -292,12 +219,6 @@ const contentDefaults = {
       paddingLeft: "20px",
       paddingRight: "20px",
       paddingTop: "20px",
-    },
-    mobileStyles: {
-      paddingTop: "15px",
-      paddingRight: "15px",
-      paddingBottom: "15px",
-      paddingLeft: "15px",
     }
   },
   paragraph: {
@@ -318,14 +239,6 @@ const contentDefaults = {
       paddingRight: '15px',
       paddingBottom: '15px',
       paddingLeft: '15px',
-    },
-    mobileStyles: {
-      textAlign: "left",
-      fontSize: "14px",
-      paddingTop: "15px",
-      paddingRight: "15px",
-      paddingBottom: "15px",
-      paddingLeft: "15px",
     }
   },
   general: {
@@ -352,11 +265,6 @@ const contentDefaults = {
       paddingRight: "15px",
       paddingTop: "15px",
       paddingBottom: "15px",
-    },
-    mobileStyles: {
-      padding: "15px",
-      paddingLeft: "15px",
-      paddingRight: "15px",
-    },
+    }
   }
 }
