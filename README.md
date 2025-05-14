@@ -188,6 +188,21 @@ For production deployment:
 3. Use HTTPS for all connections
 4. Consider adding rate limiting
 
+## 🔒 Security Notes
+
+### Credential Management
+
+This application uses server-side authentication to protect sensitive API credentials:
+
+1. **Never commit `.env` files** to the repository
+2. All authentication with the BeeFree API happens server-side
+3. The client only receives the necessary tokens, not the underlying credentials
+4. Use environment variables for all sensitive information:
+   - `BEEFREE_CLIENT_ID`
+   - `BEEFREE_CLIENT_SECRET`
+   - `HTML_IMPORTER_API_KEY`
+   - `CSAPI_API_KEY`
+
 ## 🐛 Troubleshooting
 
 1. **CORS Errors**:

@@ -142,22 +142,6 @@
       
       return notification;
     }
-    
-    var requestAuth = function (clientId, clientSecret, callback) {
-      var req = new XMLHttpRequest();
-      req.onreadystatechange = function () {
-        if (req.readyState === 4 && req.status === 200) {
-          var response = JSON.parse(req.responseText);
-          callback(response);
-        } else if (req.readyState === 4 && req.status !== 200) {
-          console.error('Access denied, invalid credentials. Please check you entered a valid client_id and client_secret.');
-        }
-      };
-
-      req.open('POST', 'https://auth.getbee.io/apiauth', true);
-      req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-      req.send(`grant_type=password&client_id=${clientId}&client_secret=${clientSecret}`);
-    };
 
     var currentTemplate = null;
 
@@ -318,29 +302,26 @@
         });
     });
 
-    fetch('/proxy/credentials')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to get BeeFree credentials');
-        }
-        return response.json();
-      })
-      .then(credentials => {
-        requestAuth(
-          credentials.clientId,
-          credentials.clientSecret,
-          function (token) {
-            BeePlugin.create(token, beeConfig, function (beePluginInstance) {
-              bee = beePluginInstance;
-
-              bee.start({})
-            });
-          });
-      })
-      .catch(error => {
-        console.error('Error fetching BeeFree credentials:', error);
-        document.body.innerHTML = '<div style="color: red; padding: 20px;">Error: Unable to fetch BeeFree credentials. Please check your server configuration.</div>';
+    fetch('/proxy/auth', {
+      method: 'POST'
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to authenticate with BeeFree API');
+      }
+      return response.json();
+    })
+    .then(token => {
+      BeePlugin.create(token, beeConfig, function (beePluginInstance) {
+        bee = beePluginInstance;
+        bee.start({});
       });
+    })
+    .catch(error => {
+      console.error('Authentication error:', error);
+      document.body.innerHTML = '<div style="color: red; padding: 20px;">Error: Authentication failed. Please check server configuration and logs.</div>';
+      showNotification('error', 'Authentication failed. Please check server logs.');
+    });
   </script>
 </body>
 
