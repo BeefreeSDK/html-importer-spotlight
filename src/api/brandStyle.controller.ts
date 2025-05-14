@@ -15,11 +15,26 @@ export class BrandStyleController {
             }
 
             const result = await BeeApiService.applyBrandStyles(req.body);
+            
+            if (result && result.status === 'unchanged') {
+                res.json({ 
+                    status: 'unchanged',
+                    message: 'No changes were needed for this template',
+                    json: result.json
+                });
+                return;
+            }
+            
             res.json(result);
         } catch (error) {
+            const errorMessage = (error as Error).message || 'Unknown error';
+            const errorDetails = errorMessage.includes('BeeFree Brand Style API Error') 
+                ? errorMessage 
+                : `Failed to apply brand styles: ${errorMessage}`;
+            
             res.status(500).json({
                 error: 'Failed to apply brand styles',
-                details: (error as Error).message
+                details: errorDetails
             } as ApiErrorResponse);
         }
     }

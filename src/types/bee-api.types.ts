@@ -1,4 +1,4 @@
-export interface BeeTemplate {
+export interface BeeTemplateObject {
   page: {
     title: string;
     description?: string;
@@ -18,6 +18,8 @@ export interface BeeTemplate {
   };
 }
 
+export type BeeTemplate = BeeTemplateObject | string;
+
 export interface HtmlConversionResponse {
   template: BeeTemplate;
   status?: string;
@@ -29,4 +31,10 @@ export interface ApiErrorResponse {
   message?: string;
   details?: string;
   status?: number;
+}
+
+export interface BrandStyleResponse {
+  status?: string;
+  message?: string;
+  json: BeeTemplate;
 }

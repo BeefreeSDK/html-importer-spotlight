@@ -75,6 +75,10 @@
             <a href="https://docs.beefree.io/beefree-sdk/apis/html-importer-api" target="_blank">HTML Importer</a>
           </li>
           <li class="dropdown-item">
+            <a href="https://docs.beefree.io/beefree-sdk/apis/content-services-api/brand-style-management" 
+              target="_blank">Brand Style</a>
+          </li>
+          <li class="dropdown-item">
             <a href="https://docs.beefree.io/beefree-sdk/other-customizations/appearance/content-defaults"
               target="_blank">Content Defaults</a>
           </li>
@@ -114,8 +118,32 @@
   <script src="https://app-rsrc.getbee.io/plugin/BeePlugin.js"></script>
 
   <script type="text/javascript">
-    // Request function
-    var request = function (method, url, data, type, callback) {
+    function showNotification(type, message, duration = 3000) {
+      const notification = document.createElement('div');
+      notification.className = 'notification';
+      
+      if (type === 'loading') {
+        notification.innerHTML = '<div class="notification-spinner"></div> ' + message;
+      } else {
+        notification.innerHTML = '<div class="notification-' + type + '"></div> ' + message;
+        notification.classList.add(type);
+      }
+      
+      document.body.appendChild(notification);
+      
+      if (type !== 'loading') {
+        setTimeout(() => {
+          notification.classList.add('fade-out');
+          setTimeout(() => {
+            document.body.removeChild(notification);
+          }, 500);
+        }, duration);
+      }
+      
+      return notification;
+    }
+    
+    var requestAuth = function (clientId, clientSecret, callback) {
       var req = new XMLHttpRequest();
       req.onreadystatechange = function () {
         if (req.readyState === 4 && req.status === 200) {
@@ -126,20 +154,9 @@
         }
       };
 
-      req.open(method, url, true);
-      if (data && type) {
-        if (type === 'multipart/form-data') {
-          var formData = new FormData();
-          for (var key in data) {
-            formData.append(key, data[key]);
-          }
-          data = formData;
-        }
-        else {
-          req.setRequestHeader('Content-type', type);
-        }
-      }
-      req.send(data);
+      req.open('POST', 'https://auth.getbee.io/apiauth', true);
+      req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      req.send(`grant_type=password&client_id=${clientId}&client_secret=${clientSecret}`);
     };
 
     var currentTemplate = null;
@@ -180,7 +197,7 @@
       mergeContents: mergeContents,
       contentDefaults: contentDefaults,
       onChange(message, changes) {
-        currentTemplate = message;
+        currentTemplate = typeof message === 'string' ? JSON.parse(message) : message;
       }
     };
 
@@ -238,8 +255,8 @@
           closeModal();
         })
         .catch(error => {
-          errorMessage.textContent = 'Error: ' + error.message;
-          errorMessage.style.display = 'block';
+          document.body.removeChild(notification);
+          showNotification('error', `Error: ${error.message}`, 5000);
         })
         .finally(() => {
           loading.style.display = 'none';
@@ -261,46 +278,43 @@
     });
 
     applyBrandStyleBtn.addEventListener('click', function () {
-      const notification = document.createElement('div');
-      notification.className = 'notification';
-      notification.innerHTML = '<div class="notification-spinner"></div> Applying brand style...';
-      document.body.appendChild(notification);
+      if (!currentTemplate) {
+        showNotification('error', 'Error: No template loaded. Please import HTML first.');
+        return;
+      }
+      
+      const notification = showNotification('loading', 'Applying brand style...');
 
       fetch('/proxy/brand-style', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: currentTemplate
+        body: JSON.stringify(currentTemplate)
       })
         .then(response => {
-          if (!response.ok) throw new Error('Failed to apply brand style');
+          if (!response.ok) {
+            return response.json().then(errorData => {
+              throw new Error(errorData.details || 'Failed to apply brand style');
+            });
+          }
           return response.json();
         })
         .then(data => {
-          notification.innerHTML = '<div class="notification-success">✓</div> Brand style applied successfully!';
-          notification.classList.add('success');
+          document.body.removeChild(notification);
+          
+          if (data.status === 'unchanged') {
+            showNotification('info', 'No style changes needed for this template.');
+          } else {
+            showNotification('success', 'Brand style applied successfully!');
+          }
 
           bee.load(data.json);
           currentTemplate = data.json;
-
-          setTimeout(() => {
-            notification.classList.add('fade-out');
-            setTimeout(() => {
-              document.body.removeChild(notification);
-            }, 500);
-          }, 3000);
         })
         .catch(error => {
-          notification.innerHTML = '<div class="notification-error">×</div> Error: ' + error.message;
-          notification.classList.add('error');
-
-          setTimeout(() => {
-            notification.classList.add('fade-out');
-            setTimeout(() => {
-              document.body.removeChild(notification);
-            }, 500);
-          }, 5000);
+          document.body.removeChild(notification);
+          showNotification('error', 'Error: ' + error.message, 5000);
         });
     });
 
@@ -312,11 +326,9 @@
         return response.json();
       })
       .then(credentials => {
-        request(
-          'POST',
-          'https://auth.getbee.io/apiauth',
-          `grant_type=password&client_id=${credentials.clientId}&client_secret=${credentials.clientSecret}`,
-          'application/x-www-form-urlencoded',
+        requestAuth(
+          credentials.clientId,
+          credentials.clientSecret,
           function (token) {
             BeePlugin.create(token, beeConfig, function (beePluginInstance) {
               bee = beePluginInstance;

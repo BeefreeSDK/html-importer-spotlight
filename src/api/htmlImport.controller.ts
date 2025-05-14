@@ -17,7 +17,9 @@ export class HtmlImportController {
         return;
       }
       
-      if (htmlContent.length > config.maxSizeBytes) {
+      const contentSize = htmlContent.length;
+      
+      if (contentSize > config.maxSizeBytes) {
         res.status(413).json({ 
           error: 'HTML content too large',
           details: `Maximum allowed size is ${config.maxSizeBytes / (1024 * 1024)}MB`
@@ -26,14 +28,20 @@ export class HtmlImportController {
       }
       
       const sanitizedHtml = HtmlSanitizer.sanitize(htmlContent);
-      
+
       const result = await BeeApiService.convertHtmlToJson(sanitizedHtml.content);
       
       res.json(result);
     } catch (error) {
+      
+      const errorMessage = (error as Error).message || 'Unknown error';
+      const errorDetails = errorMessage.includes('BeeFree API Error') 
+        ? errorMessage 
+        : `Failed to convert HTML to JSON: ${errorMessage}`;
+      
       res.status(500).json({ 
-        error: 'Failed to convert HTML to JSON',
-        details: (error as Error).message
+        error: 'HTML conversion failed',
+        details: errorDetails
       } as ApiErrorResponse);
     }
   }

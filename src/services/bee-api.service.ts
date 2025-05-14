@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import config from '../config/app-config';
-import { BeeTemplate, HtmlConversionResponse } from '../types/bee-api.types';
+import { BeeTemplate, BrandStyleResponse, HtmlConversionResponse } from '../types/bee-api.types';
 import { brandStyle } from '../resources/brandStyle';
 
 export class BeeApiService {
@@ -25,21 +25,34 @@ export class BeeApiService {
         const axiosError = error as AxiosError;
         if (axiosError.response) {
           const errorMessage = axiosError.response.data as any;
-          throw new Error(`BeeFree API Error: ${errorMessage.message || axiosError.message}`);
+          const errorDetail = errorMessage.message || errorMessage.details || errorMessage.error || axiosError.message;
+          throw new Error(`BeeFree HTML Import Error: ${errorDetail}`);
         }
       }
 
-      throw new Error(`BeeFree API Error: ${(error as Error).message}`);
+      throw new Error(`BeeFree HTML Import Error: ${(error as Error).message}`);
     }
   }
 
-  public static async applyBrandStyles(template: BeeTemplate): Promise<any> {
+  public static async applyBrandStyles(template: BeeTemplate | string): Promise<BrandStyleResponse> {
+    let parsedTemplate;
+    
     try {
+      if (typeof template === 'string') {
+        try {
+          parsedTemplate = JSON.parse(template);
+        } catch (e) {
+          throw new Error('Invalid template format: JSON parsing failed');
+        }
+      } else {
+        parsedTemplate = template;
+      }
+      
       const response: AxiosResponse = await axios.post(
         config.brandStyleUrl,
         {
           styles: brandStyle,
-          template
+          template: parsedTemplate
         },
         {
           headers: {
@@ -54,8 +67,18 @@ export class BeeApiService {
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError;
         if (axiosError.response) {
+          // Handle 422 status code specially - no changes were made to the template
+          if (axiosError.response.status === 422) {
+            return { 
+              status: 'unchanged',
+              message: 'No changes were needed for this template',
+              json: parsedTemplate
+            };
+          }
+          
           const errorMessage = axiosError.response.data as any;
-          throw new Error(`BeeFree Brand Style API Error: ${errorMessage.message || axiosError.message}`);
+          const errorDetail = errorMessage.message || errorMessage.details || errorMessage.error || axiosError.message;
+          throw new Error(`BeeFree Brand Style API Error: ${errorDetail}`);
         }
       }
 

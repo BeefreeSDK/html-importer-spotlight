@@ -69,21 +69,50 @@ body {
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
   display: inline-block;
+}
+
+#import-html-btn, #apply-brand-style-btn {
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+#import-html-btn:hover, #apply-brand-style-btn:hover {
+  background-color: rgba(106, 13, 173, 0.8);
+  border-color: white;
 }
 
 .nav-link.active {
   background-color: #6a0dad;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid white;
+}
+
+#docs-dropdown.active {
+  background-color: #6a0dad;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid white;
 }
 
 .nav-link:hover {
-  background-color: #7b1fa2;
+  background-color: rgba(123, 31, 162, 0.7);
 }
 
 .dropdown {
   position: relative;
+}
+
+#docs-dropdown {
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+#docs-dropdown:hover {
+  background-color: rgba(123, 31, 162, 0.7);
+  border: none;
 }
 
 .dropdown-arrow {
@@ -334,23 +363,41 @@ body {
   position: fixed;
   top: 70px;
   right: 20px;
-  padding: 15px 20px;
+  padding: 12px 16px;
   background-color: #333;
   color: white;
-  border-radius: 4px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   display: flex;
   align-items: center;
   z-index: 1000;
-  transition: opacity 0.5s ease;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  min-width: 240px;
+  border-left: 4px solid transparent;
+  line-height: 1.4;
+}
+
+.notification:hover {
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+  cursor: default;
 }
 
 .notification.success {
   background-color: #4caf50;
+  border-left-color: #2e7d32;
 }
 
 .notification.error {
   background-color: #f44336;
+  border-left-color: #c62828;
+}
+
+.notification.info {
+  background-color: #2196F3;
+  border-left-color: #0d47a1;
 }
 
 .notification-spinner {
@@ -363,24 +410,36 @@ body {
   animation: spin 1s linear infinite;
 }
 
-.notification-success {
-  width: 20px;
-  height: 20px;
+.notification-success,
+.notification-error,
+.notification-info {
+  width: 24px;
+  height: 24px;
   margin-right: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: relative;
   font-weight: bold;
-  font-size: 16px;
-  text-align: center;
-  line-height: 20px;
 }
 
-.notification-error {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
-  font-weight: bold;
-  font-size: 18px;
-  text-align: center;
-  line-height: 20px;
+.notification-success:before {
+  content: "✓";
+  font-size: 14px;
+}
+
+.notification-error:before {
+  content: "!";
+  font-size: 16px;
+}
+
+.notification-info:before {
+  content: "i";
+  font-size: 14px;
+  font-style: italic;
 }
 
 .notification.fade-out {
