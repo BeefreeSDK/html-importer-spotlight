@@ -6,7 +6,6 @@ This project demonstrates how to integrate Beefree SDK email builder SDK with a 
 
 - Beefree SDK email builder integration
 - HTML import functionality with content sanitization
-- TypeScript for better code quality and maintenance
 - Server-side proxy for API requests
 - Template loading and saving
 - Security-focused HTML processing
@@ -25,8 +24,7 @@ This project demonstrates how to integrate Beefree SDK email builder SDK with a 
 ```
 html-importer-spotlight/
 ├── public/               # Static assets
-│   ├── index.html        # Main application HTML
-│   └── template.json     # Sample BeeFree template
+│   └── index.html        # Main application HTML
 ├── src/                  # TypeScript source files
 │   ├── api/              # API controllers and routes
 │   │   ├── html-import.controller.ts  # HTML import controller

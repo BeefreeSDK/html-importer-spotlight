@@ -11,7 +11,7 @@ export class BeeApiService {
         {
           headers: {
             'Content-Type': 'text/html',
-            'Authorization': `Bearer ${config.apiKey}`
+            'Authorization': `Bearer ${config.HTMLImporterApiKey}`
           },
           maxContentLength: Infinity,
           maxBodyLength: Infinity

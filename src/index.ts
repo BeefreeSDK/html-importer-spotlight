@@ -1,4 +1,5 @@
-/**
- * Main application entry point
- */
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 export { default } from './server';

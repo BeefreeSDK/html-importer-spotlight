@@ -4,5 +4,6 @@ import { HtmlImportController } from './html-import.controller';
 const router = express.Router();
 
 router.post('/html-to-json', HtmlImportController.convertHtmlToJson);
+router.get('/credentials', HtmlImportController.getCredentials);
 
 export default router;
