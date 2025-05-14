@@ -6,146 +6,46 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" href="./favicon.png" type="image/png" />
-  <style type="text/css">
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
-
-    body {
-      overflow: hidden;
-      background-color: #f5f5f5;
-      color: #333;
-    }
-
-    #bee-plugin-container {
-      position: absolute;
-      top: 50px;
-      bottom: 30px;
-      left: 5px;
-      right: 5px;
-    }
-
-    #integrator-bottom-bar {
-      position: absolute;
-      height: 25px;
-      bottom: 0;
-      left: 5px;
-      right: 0;
-    }
-
-    #import-html-btn {
-      position: absolute;
-      top: 5px;
-      left: 5px;
-      background-color: #6a0dad;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: 500;
-    }
-
-    #import-html-btn:hover {
-      background-color: #7b1fa2;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.4);
-    }
-
-    .modal-content {
-      background-color: #fefefe;
-      margin: 15% auto;
-      padding: 20px;
-      border-radius: 8px;
-      width: 50%;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-
-    .modal-actions {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 20px;
-      gap: 10px;
-    }
-
-    .modal-actions button {
-      padding: 8px 16px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: 500;
-    }
-
-    .modal-actions .cancel-btn {
-      background-color: #f5f5f5;
-      border: 1px solid #ddd;
-    }
-
-    .modal-actions .upload-btn {
-      background-color: #6a0dad;
-      color: white;
-      border: none;
-    }
-
-    .modal-actions .upload-btn:hover {
-      background-color: #7b1fa2;
-    }
-
-    #html-input {
-      width: 100%;
-      height: 200px;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-family: monospace;
-      resize: vertical;
-    }
-
-    .error-message {
-      color: #d32f2f;
-      background-color: #ffebee;
-      border-left: 4px solid #f44336;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 4px;
-      font-size: 14px;
-      display: none;
-    }
-
-    .loading {
-      display: none;
-      margin-top: 10px;
-      color: #6a0dad;
-    }
-  </style>
+  <link rel="stylesheet" href="./styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <button id="import-html-btn">Import HTML</button>
+  <nav class="navbar">
+    <a href="./" class="navbar-brand">
+      <img src="./favicon.png" alt="BeeFree Logo" />
+      <span>Beefree SDK - HTML Importer Spotlight</span>
+    </a>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link active" id="import-html-btn">Import HTML</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://docs.beefree.io/beefree-sdk/apis/html-importer-api" target="_blank">Documentation</a>
+      </li>
+    </ul>
+  </nav>
+  
   <div id="bee-plugin-container"></div>
 
   <!-- HTML Import Modal -->
   <div id="html-import-modal" class="modal">
     <div class="modal-content">
-      <h3>Import HTML Email</h3>
-      <p style="margin-bottom: 10px; font-size: 12px; color: #666;">
-        Paste your HTML email code below. Scripts and other potentially harmful content will be automatically removed.
-      </p>
-      <textarea id="html-input" placeholder="Paste your HTML email here..."></textarea>
-      <div id="html-error" class="error-message">HTML not valid</div>
-      <div id="loading" class="loading">Converting HTML, please wait...</div>
+      <div class="modal-header">
+        <h3>Import HTML Email</h3>
+        <span class="modal-close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p class="modal-description">
+          Paste your HTML email code below. Scripts and other potentially harmful content will be automatically removed for security.
+        </p>
+        <textarea id="html-input" placeholder="Paste your HTML email here..."></textarea>
+        <div id="html-error" class="error-message">HTML not valid</div>
+        <div id="loading" class="loading">
+          <span class="loading-spinner"></span>
+          Converting HTML, please wait...
+        </div>
+      </div>
       <div class="modal-actions">
         <button class="cancel-btn">Cancel</button>
         <button class="upload-btn">Import</button>
@@ -242,16 +142,16 @@
     var importBtn = document.getElementById('import-html-btn');
     var cancelBtn = document.querySelector('.cancel-btn');
     var uploadBtn = document.querySelector('.upload-btn');
+    var modalCloseBtn = document.querySelector('.modal-close');
 
-    importBtn.addEventListener('click', function() {
-      modal.style.display = 'block';
+    function closeModal() {
+      modal.style.display = 'none';
       htmlInput.value = '';
       errorMessage.style.display = 'none';
-    });
-
-    cancelBtn.addEventListener('click', function() {
-      modal.style.display = 'none';
-    });
+    }
+    
+    cancelBtn.addEventListener('click', closeModal);
+    modalCloseBtn.addEventListener('click', closeModal);
 
     uploadBtn.addEventListener('click', function() {
       var html = htmlInput.value.trim();
@@ -265,7 +165,11 @@
       loading.style.display = 'block';
       errorMessage.style.display = 'none';
       
-      fetch('http://localhost:3001/proxy/html-to-json', {
+      loading.style.display = 'flex';
+      uploadBtn.disabled = true;
+      uploadBtn.style.opacity = '0.7';
+      
+      fetch('/proxy/html-to-json', {
         method: 'POST',
         headers: {
           'Content-Type': 'text/html'
@@ -278,7 +182,7 @@
       })
       .then(data => {
         bee.load(data);
-        modal.style.display = 'none';
+        closeModal();
       })
       .catch(error => {
         errorMessage.textContent = 'Error: ' + error.message;
@@ -286,6 +190,8 @@
       })
       .finally(() => {
         loading.style.display = 'none';
+        uploadBtn.disabled = false;
+        uploadBtn.style.opacity = '1';
       });
     });
 
@@ -293,6 +199,12 @@
       if (event.target === modal) {
         modal.style.display = 'none';
       }
+    });
+    
+    importBtn.addEventListener('click', function() {
+      modal.style.display = 'block';
+      htmlInput.value = '';
+      errorMessage.style.display = 'none';
     });
 
     fetch('/proxy/credentials')
