@@ -9,6 +9,50 @@
   <link rel="stylesheet" href="./styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="./content-defaults.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const dropdown = document.querySelector('.dropdown');
+      const dropdownLink = document.querySelector('#docs-dropdown');
+      
+      dropdownLink.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          dropdown.classList.add('active');
+          const firstItem = dropdown.querySelector('.dropdown-item a');
+          if (firstItem) firstItem.focus();
+        }
+      });
+      
+      dropdown.addEventListener('mouseleave', function() {
+        dropdown.classList.remove('active');
+      });
+      
+      // Add key navigation for dropdown items
+      const dropdownItems = document.querySelectorAll('.dropdown-item a');
+      dropdownItems.forEach((item, index) => {
+        item.addEventListener('keydown', function(e) {
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (index < dropdownItems.length - 1) {
+              dropdownItems[index + 1].focus();
+            }
+          } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (index > 0) {
+              dropdownItems[index - 1].focus();
+            } else {
+              dropdownLink.focus();
+              dropdown.classList.remove('active');
+            }
+          } else if (e.key === 'Escape') {
+            e.preventDefault();
+            dropdownLink.focus();
+            dropdown.classList.remove('active');
+          }
+        });
+      });
+    });
+  </script>
 </head>
 
 <body>
@@ -21,8 +65,16 @@
       <li class="nav-item">
         <a class="nav-link active" id="import-html-btn">Import HTML</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="https://docs.beefree.io/beefree-sdk/apis/html-importer-api" target="_blank">Documentation</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link" href="#" id="docs-dropdown">Documentation <span class="dropdown-arrow">▾</span></a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-item">
+            <a href="https://docs.beefree.io/beefree-sdk/apis/html-importer-api" target="_blank">HTML Importer</a>
+          </li>
+          <li class="dropdown-item">
+            <a href="https://docs.beefree.io/beefree-sdk/other-customizations/appearance/content-defaults" target="_blank">Content Defaults</a>
+          </li>
+        </ul>
       </li>
     </ul>
   </nav>

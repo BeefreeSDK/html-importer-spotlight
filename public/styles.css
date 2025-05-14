@@ -82,6 +82,76 @@ body {
   background-color: #7b1fa2;
 }
 
+.dropdown {
+  position: relative;
+}
+
+.dropdown-arrow {
+  font-size: 10px;
+  margin-left: 5px;
+  transition: transform 0.2s ease;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 5px 0;
+  min-width: 180px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  z-index: 200;
+}
+
+.dropdown-item {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-item a {
+  display: block;
+  padding: 8px 16px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 400;
+  white-space: nowrap;
+  transition: background-color 0.2s;
+}
+
+.dropdown-item a:hover {
+  background-color: #f5f0fa;
+  color: #6a0dad;
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown.active .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown:hover .dropdown-arrow,
+.dropdown.active .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+/* Focus styles for accessibility */
+.dropdown-item a:focus {
+  outline: 2px solid #6a0dad;
+  background-color: #f5f0fa;
+}
+
+.nav-link:focus {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
 
 #bee-plugin-container {
   position: absolute;
