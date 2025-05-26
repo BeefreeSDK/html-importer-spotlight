@@ -1,17 +1,15 @@
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
-import config from './config/app-config';
-import htmlImportRoutes from './routes';
+import config from './config';
+import apiRoutes from './api';
 
 const app = express();
 
-app.use(cors(
-    {
-        origin: 'http://localhost:3001',
-        methods: ['GET', 'POST'],
-    }
-));
+app.use(cors({
+  origin: 'http://localhost:3001',
+  methods: ['GET', 'POST'],
+}));
 
 app.use(express.text({ 
   type: 'text/html',
@@ -24,12 +22,15 @@ app.use(express.json({
 
 app.use(express.static(path.join(__dirname, '../public')));
 
-app.use('/proxy', htmlImportRoutes);
+app.use('/proxy', apiRoutes);
 
 app.listen(config.port, () => {
-  console.log(`Server started successfully`, { port: config.port });
+  console.log(`---------------------------------------------`);
+  console.log(`🐝 Beefree HTML Importer Demo Server`);
+  console.log(`---------------------------------------------`);
   console.log(`Server running on http://localhost:${config.port}`);
-  console.log(`Access the HTML importer at http://localhost:${config.port}`);
+  console.log(`Open the above URL in your browser to start`);
+  console.log(`---------------------------------------------`);
 });
 
 process.on('SIGINT', () => {

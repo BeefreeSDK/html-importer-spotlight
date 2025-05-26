@@ -9,8 +9,6 @@
         "build": "npm run clean && tsc",
         "watch": "tsc --watch",
         "clean": "rm -rf dist",
-        "create-env": "cp .env.example .env",
-        "setup": "npm install && npm run create-env",
         "dev:debug": "nodemon --inspect --exec ts-node src/index.ts",
         "lint": "eslint --ext .ts src/"
     },

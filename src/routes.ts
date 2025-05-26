@@ -1,5 +1,7 @@
 import express from 'express';
-import { BrandStyleController, CredentialsController, HtmlImportController } from './api';
+import { HtmlImportController } from './api/htmlImport.controller';
+import { CredentialsController } from './api/credentials.controller';
+import { BrandStyleController } from './api/brandStyle.controller';
 
 const router = express.Router();
 
