@@ -29,7 +29,7 @@ const BeeApi = {
   async convertHtmlToJson(html: string): Promise<any> {
     try {
       const response = await axios.post(
-        config.htmlImporterUrl,
+        'https://api.getbee.io/v1/conversion/html-to-json',
         html,
         {
           headers: {
@@ -68,7 +68,7 @@ const BeeApi = {
       }
       
       const response = await axios.post(
-        config.brandStyleUrl,
+        'https://api.getbee.io/v1/template/brand',
         {
           styles: brandStyle,
           template: parsedTemplate

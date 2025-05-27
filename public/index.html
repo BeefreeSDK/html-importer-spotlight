@@ -62,9 +62,11 @@
       <span>Beefree SDK - HTML Importer Spotlight</span>
     </a>
     <ul class="navbar-nav">
+      <!-- HTML Importer Button -->
       <li class="nav-item">
         <a class="nav-link active" id="import-html-btn">Import HTML</a>
       </li>
+      <!-- Apply Brand Style Button -->
       <li class="nav-item">
         <a class="nav-link" id="apply-brand-style-btn">Apply Brand Style</a>
       </li>
@@ -206,14 +208,9 @@
     cancelBtn.addEventListener('click', closeModal);
     modalCloseBtn.addEventListener('click', closeModal);
 
+    // Trigger the HTML Importer API Call
     uploadBtn.addEventListener('click', function () {
       var html = htmlInput.value.trim();
-
-      if (!html || !html.includes('<') || !html.includes('>')) {
-        errorMessage.textContent = 'Please enter valid HTML content';
-        errorMessage.style.display = 'block';
-        return;
-      }
 
       loading.style.display = 'block';
       errorMessage.style.display = 'none';
