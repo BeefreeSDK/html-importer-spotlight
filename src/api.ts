@@ -115,16 +115,61 @@ const apiHandlers = {
         return;
       }
 
-      const response = await fetch('https://auth.getbee.io/apiauth', {
+      const response = await fetch('https://auth.getbee.io/loginV2', {
         method: 'POST',
         headers: {
-          'Content-type': 'application/x-www-form-urlencoded'
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: `grant_type=password&client_id=${config.beeClientId}&client_secret=${config.beeClientSecret}`
+        body: JSON.stringify({
+          client_id: config.beeClientId,
+          client_secret: config.beeClientSecret,
+          uid: 'demo_user'
+        })
       });
 
       if (!response.ok) {
-        throw new Error('Authentication failed');
+        // Try to parse error response from BeeFree API
+        let errorDetails = 'Authentication failed';
+        let statusCode = response.status;
+        
+        try {
+          const errorResponse = await response.json();
+          errorDetails = errorResponse.message || errorDetails;
+          
+          // Handle specific BeeFree error codes
+          switch (errorResponse.code) {
+            case 5001:
+              errorDetails = 'Unsupported media type. Only application/json is allowed.';
+              statusCode = 415;
+              break;
+            case 5002:
+              errorDetails = 'Unable to authenticate with provided credentials.';
+              statusCode = 401;
+              break;
+            case 5003:
+              errorDetails = 'Application is disabled. Please contact support.';
+              statusCode = 403;
+              break;
+            case 5005:
+              errorDetails = 'Invalid UID parameter.';
+              statusCode = 400;
+              break;
+            default:
+              // Use the status code from the response
+              statusCode = response.status;
+          }
+        } catch (parseError) {
+          // If we can't parse the error response, use generic error
+          console.error('Failed to parse error response:', parseError);
+        }
+        
+        res.status(statusCode).json({
+          error: 'BeeFree Authentication Error',
+          details: errorDetails,
+          code: statusCode
+        });
+        return;
       }
 
       const token = await response.json();
@@ -133,7 +178,8 @@ const apiHandlers = {
       console.error('Authentication error:', error);
       res.status(500).json({
         error: 'Authentication Error',
-        details: 'Failed to authenticate with BeeFree API'
+        details: 'Failed to authenticate with BeeFree API',
+        code: 500
       });
     }
   },
